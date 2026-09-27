@@ -1,0 +1,38 @@
+export const products = [
+  {
+    id: 1,
+    name: 'Banarasi Silk Saree - Red',
+    price: 1299,
+    mrp: 2999,
+    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-woman-in-a-red-dress-39875-large.mp4',
+    category: 'silk',
+  },
+  {
+    id: 2,
+    name: 'Kanjivaram Silk Saree - Gold',
+    price: 2499,
+    mrp: 4999,
+    image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=500',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-woman-modeling-a-yellow-dress-39871-large.mp4',
+    category: 'silk',
+  },
+  {
+    id: 3,
+    name: 'Cotton Handloom Saree - Blue',
+    price: 899,
+    mrp: 1799,
+    image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=500',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-woman-in-a-floral-dress-39873-large.mp4',
+    category: 'cotton',
+  },
+  {
+    id: 4,
+    name: 'Georgette Party Saree - Pink',
+    price: 1599,
+    mrp: 3199,
+    image: 'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=500',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-woman-in-a-red-dress-39875-large.mp4',
+    category: 'georgette',
+  },
+]

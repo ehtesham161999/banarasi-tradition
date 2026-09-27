@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Banarasi Tradition</string>
+    <string name="title_activity_main">Banarasi Tradition</string>
+    <string name="package_name">com.banarasi.tradition</string>
+    <string name="custom_url_scheme">com.banarasi.tradition</string>
+</resources>
