@@ -5,43 +5,48 @@ export default function Celebrities() {
   const { sections, loading } = useHomeSections()
 
   if (loading || !sections) {
-    return <div className="h-96 bg-gray-100 animate-pulse" />
+    return <div className="h-96 bg-cream-100 animate-pulse" />
   }
 
   const { celebrities } = sections
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto">
-      <div className="relative rounded-2xl overflow-hidden shadow-lg mb-6">
+    <section className="py-12 md:py-16 px-4 max-w-7xl mx-auto">
+      {/* Banner */}
+      <div className="relative rounded-2xl overflow-hidden shadow-lg mb-6 md:mb-8">
         <img
           src={getImageUrl(celebrities.banner)}
           alt="Loved by Celebrities"
-          className="w-full h-[220px] md:h-[320px] object-cover"
-          onError={(e) => { e.target.src = 'https://via.placeholder.com/1600x400?text=Celebrities' }}
+          className="w-full h-[180px] md:h-[280px] lg:h-[340px] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent flex items-center">
-          <div className="px-8 md:px-16">
-            <p className="text-white text-2xl md:text-4xl font-light drop-shadow-lg">Loved by</p>
-            <h2 className="text-yellow-400 text-5xl md:text-7xl font-serif font-bold italic drop-shadow-lg">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent flex items-center">
+          <div className="px-6 md:px-16">
+            <p className="text-white text-xl md:text-3xl lg:text-4xl font-light drop-shadow-lg">
+              Loved by
+            </p>
+            <h2 className="text-yellow-400 text-4xl md:text-6xl lg:text-7xl font-serif font-bold italic drop-shadow-2xl">
               Celebrities
             </h2>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-3 md:gap-4">
+
+      {/* Celebrity Cards */}
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
         {celebrities.list.map((celeb, idx) => (
           <div
             key={idx}
-            className="relative rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-shadow"
+            className="relative rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-2xl transition-all duration-500"
           >
             <img
               src={getImageUrl(celeb.img)}
               alt={celeb.name}
-              className="w-full h-64 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              onError={(e) => { e.target.src = 'https://via.placeholder.com/300?text=No' }}
+              className="w-full h-40 md:h-64 lg:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3">
-              <p className="text-white text-[10px] md:text-xs font-bold uppercase tracking-wider text-center">
+
+            {/* Gradient Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-2 md:p-3">
+              <p className="text-white text-[9px] md:text-xs font-bold uppercase tracking-[0.1em] text-center">
                 {celeb.name}
               </p>
             </div>

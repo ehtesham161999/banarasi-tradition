@@ -75,25 +75,30 @@ export default function Category() {
   return (
     <div className="pb-20">
       {/* Header */}
-      <section className="bg-cream-100 py-10 text-center border-b border-cream-200">
-        <h1 className="text-3xl md:text-5xl font-serif font-bold text-maroon-500">
+      <section className="bg-cream-100 py-10 md:py-14 text-center border-b border-cream-200">
+        <h1
+          className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-[0.05em]"
+          style={{ color: '#1E3A8A' }}
+        >
           {categoryName}
         </h1>
-        <p className="text-gray-600 mt-2 text-sm">{filtered.length} products</p>
+        <p className="text-gray-600 mt-2 md:mt-3 text-sm md:text-base">
+          {filtered.length} Products
+        </p>
       </section>
 
       {/* Filter + Sort Bar */}
-      <section className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-3 border-b border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-3 border-b border-gray-200 sticky top-[72px] bg-white z-40">
         <button
           onClick={() => setShowFilter(!showFilter)}
-          className="border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:border-maroon-500"
+          className="border border-gray-300 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider hover:border-maroon-500 hover:text-maroon-500 transition-colors"
         >
           🔍 {showFilter ? 'Hide' : 'Show'} Filters
         </button>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-maroon-500"
+          className="border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium focus:outline-none focus:border-maroon-500"
         >
           <option value="newest">Newest First</option>
           <option value="price-low">Price: Low to High</option>
@@ -105,7 +110,7 @@ export default function Category() {
       {/* Filter Panel */}
       {showFilter && (
         <section className="max-w-7xl mx-auto px-4 py-4 bg-cream-50 border-b border-gray-200">
-          <h3 className="text-sm font-bold text-gray-800 mb-3">Price Range</h3>
+          <h3 className="text-sm font-bold text-gray-800 mb-3 uppercase tracking-wider">Price Range</h3>
           <div className="flex items-center gap-3">
             <input
               type="number"
@@ -124,7 +129,7 @@ export default function Category() {
             />
             <button
               onClick={() => setPriceRange([0, 10000])}
-              className="text-maroon-500 text-sm hover:underline"
+              className="text-maroon-500 text-sm font-bold hover:underline"
             >
               Reset
             </button>
@@ -133,35 +138,35 @@ export default function Category() {
       )}
 
       {/* Products Grid */}
-      <section className="py-6 px-4 max-w-7xl mx-auto">
+      <section className="py-6 md:py-10 px-4 max-w-7xl mx-auto">
         {filtered.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-5xl mb-4">🛍️</p>
             <p className="text-gray-500 mb-4">Koi product nahi hai</p>
             <button
               onClick={() => navigate('/')}
-              className="bg-maroon-500 text-white px-6 py-3 rounded-lg font-semibold"
+              className="bg-maroon-500 text-white px-6 py-3 rounded-lg font-bold uppercase tracking-wider"
             >
               Home Pe Jao
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
             {filtered.map((p) => {
               const discount = Math.round((1 - p.price / p.mrp) * 100)
               return (
                 <div
                   key={p._id}
                   onClick={() => navigate(`/product/${p._id}`)}
-                  className="bg-white rounded-lg overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-lg overflow-hidden cursor-pointer group shadow-sm hover:shadow-2xl transition-all duration-500"
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[3/4]">
                     <img
                       src={getImageUrl(p.image)}
                       alt={p.name}
-                      className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <span className="absolute top-2 left-2 bg-maroon-500 text-white text-[10px] font-bold px-2 py-1 uppercase">
+                    <span className="absolute top-2 left-2 bg-maroon-500 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
                       {discount}% Off
                     </span>
                     <button
@@ -169,17 +174,18 @@ export default function Category() {
                         e.stopPropagation()
                         addToWishlist(p)
                       }}
-                      className="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-red-50"
+                      className="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-red-50 transition-colors"
+                      aria-label="Wishlist"
                     >
-                      {isInWishlist(p._id) ? '❤️' : '🤍'}
+                      <span className="text-sm">{isInWishlist(p._id) ? '❤️' : '🤍'}</span>
                     </button>
                   </div>
                   <div className="p-3">
-                    <p className="text-sm font-medium text-gray-800 line-clamp-2 h-10">
+                    <p className="text-xs md:text-sm font-medium text-gray-800 line-clamp-2 h-10 leading-tight">
                       {p.name}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="font-bold text-maroon-500">₹{p.price}</span>
+                      <span className="font-bold text-maroon-500 text-sm md:text-base">₹{p.price}</span>
                       <span className="text-xs text-gray-400 line-through">₹{p.mrp}</span>
                     </div>
                     <div className="text-xs text-yellow-500 mt-1">★★★★★</div>
